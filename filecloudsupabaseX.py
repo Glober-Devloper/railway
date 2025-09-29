@@ -30,7 +30,12 @@ from telegram.error import BadRequest # Import BadRequest for specific error han
 # 1 — CONFIGURATION (MODIFIED TO USE ENVIRONMENT VARIABLES)
 ###############################################################################
 BOT_TOKEN = os.environ.get("BOT_TOKEN") # Read from environment variable
-STORAGE_CHANNEL_ID = int(os.environ.get("STORAGE_CHANNEL_ID")) # Read and convert to int
+
+STORAGE_CHANNEL_ID = os.environ.get("STORAGE_CHANNEL_ID")
+if not STORAGE_CHANNEL_ID:
+    raise RuntimeError("❌ STORAGE_CHANNEL_ID not found. Please set it in Railway Variables.")
+
+STORAGE_CHANNEL_ID = int(STORAGE_CHANNEL_ID)
 BOT_USERNAME = os.environ.get("BOT_USERNAME") # Read from environment variable
 
 # Admin Configuration
